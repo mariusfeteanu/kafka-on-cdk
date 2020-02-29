@@ -1,0 +1,51 @@
+name: Deploy to AWS and Test Infra
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Deploy to AWS and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '13.5'
+      - name: install cdk
+        run: |
+          npm install -g aws-cdk
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.aws_access_key_id }}
+          aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
+          aws-region: eu-west-1
+      - name: setup python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      - name: bootstrap cdk
+        run: |
+          cdk bootstrap
+
+      - name: deploy network stack
+        run: |
+          cdk deploy --require-approval never kafka-infra-python-network
+      - name: deploy e2e test stack
+        run: |
+          cdk deploy --require-approval never kafka-infra-python-e2e-test
+      - name: deploy main stack
+        run: |
+          cdk deploy --require-approval never kafka-infra-python
+      - name: run the e2e test
+        run: |
+          python test/e2e/run-task.py
+

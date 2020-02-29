@@ -1,0 +1,6 @@
+-e .
+aws-cdk.aws-msk == 1.25.0
+aws-cdk.aws-ec2 == 1.25.0
+aws_cdk.aws_ecs == 1.25.0
+aws_cdk.aws_ecr == 1.25.0
+aws_cdk.aws_ecr_assets == 1.25.0

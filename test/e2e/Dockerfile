@@ -1,0 +1,13 @@
+FROM python:3.8-alpine3.11
+
+RUN mkdir /test
+WORKDIR /test
+COPY test_* .
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY entrypoint.sh .
+RUN command chmod +x entrypoint.sh
+
+ENTRYPOINT [ "./entrypoint.sh" ]
