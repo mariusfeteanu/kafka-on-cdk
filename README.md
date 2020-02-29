@@ -1,4 +1,4 @@
-![Deploy to AWS and Test](https://github.com/mariusfeteanu/kafka-infra-python/workflows/Deploy%20to%20AWS%20and%20Test/badge.svg)
+![Deploy to AWS and Test Infra](https://github.com/mariusfeteanu/kafka-on-cdk/workflows/Deploy%20to%20AWS%20and%20Test%20Infra/badge.svg)
 
 Deploys a MSK cluster using CDK. Includes a github actions pipeline to deploy it. There are also tests using ECS to validate that the Kafka cluster works.
 
