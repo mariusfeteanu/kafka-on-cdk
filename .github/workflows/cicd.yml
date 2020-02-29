@@ -35,17 +35,16 @@ jobs:
       - name: bootstrap cdk
         run: |
           cdk bootstrap
-
-      - name: deploy network stack
-        run: |
-          cdk deploy --require-approval never kafka-infra-python-network
-      - name: deploy e2e test stack
-        run: |
-          cdk deploy --require-approval never kafka-infra-python-e2e-test
-      - name: deploy main stack
-        run: |
-          cdk deploy --require-approval never kafka-infra-python
-      - name: run the e2e test
-        run: |
-          python test/e2e/run-task.py
+#      - name: deploy network stack
+#        run: |
+#          cdk deploy --require-approval never kafka-infra-python-network
+#      - name: deploy e2e test stack
+#        run: |
+#          cdk deploy --require-approval never kafka-infra-python-e2e-test
+#      - name: deploy main stack
+#        run: |
+#          cdk deploy --require-approval never kafka-infra-python
+#      - name: run the e2e test
+#        run: |
+#          python test/e2e/run-task.py
 
